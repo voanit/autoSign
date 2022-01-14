@@ -1,9 +1,7 @@
 const fetch = require("node-fetch");
 const sendMail = require("./sendMail");
 
-const [cookie, user, pass, to] = process.argv.slice(2);
-
-//
+let [cookie, user, pass, to] = process.argv.slice(2);
 
 process.env.user = user;
 process.env.pass = pass;
@@ -49,6 +47,8 @@ const drawFn = async () => {
   if (draw.err_no !== 0) return Promise.reject("已经签到！免费抽奖异常！");
   console.log(JSON.stringify(draw, null, 2));
   if (draw.data.lottery_type === 1) score += 66;
+  await lucky();
+  // console.log(q, "lucky");
   return Promise.resolve(`签到成功！恭喜抽到：${draw.data.lottery_name}`);
 };
 
@@ -91,11 +91,11 @@ const drawFn = async () => {
     return drawFn();
   })
   .then((msg) => {
-    console.log(msg);
+    console.log(msg, "msg");
     return sendMail({
       from: "掘金",
       to,
-      subject: "定时任务",
+      subject: "定时任务成功",
       html: `
         <h1 style="text-align: center">自动签到通知</h1>
         <p style="text-indent: 2em">签到结果：${msg}</p>
@@ -107,10 +107,11 @@ const drawFn = async () => {
     console.log("邮件发送成功！");
   })
   .catch((err) => {
+    console.log(err, "err");
     sendMail({
       from: "掘金",
       to,
-      subject: "定时任务",
+      subject: "定时任务失败",
       html: `
         <h1 style="text-align: center">自动签到通知</h1>
         <p style="text-indent: 2em">执行结果：${err}</p>
@@ -118,3 +119,20 @@ const drawFn = async () => {
       `,
     }).catch(console.error);
   });
+
+/**
+ * @desc 沾喜气
+ */
+//  ?aid=&uuid=
+const lucky = async () => {
+  const res = await fetch(
+    "https://api.juejin.cn/growth_api/v1/lottery_lucky/dip_lucky",
+    {
+      headers,
+      method: "POST",
+      credentials: "include",
+      body: JSON.stringify({ lottery_history_id: "7052109119238438925" }),
+    }
+  ).then((res) => res.json());
+  console.log(res, "llll");
+};
