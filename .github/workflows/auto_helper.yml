@@ -1,4 +1,4 @@
-name: JueJin_Helper
+name: Auto_Helper
 
 on:
   # push:
@@ -30,7 +30,9 @@ jobs:
       - name: Run Project
         env:
           COOKIE: ${{ secrets.COOKIE }}
+          COOKIE2: ${{ secrets.COOKIE2 }}
           USER: ${{ secrets.USER }}
           PASS: ${{ secrets.PASS }}
           TO: ${{ secrets.TO }}
-        run: npm ci && node index.js "${COOKIE}" "${USER}" "${PASS}" "${TO}"
+        run: npm ci && node src/juejin.js "${COOKIE}" "${USER}" "${PASS}" "${TO}"
+        run: npm ci && node src/v2free.js "${COOKIE2}" "${USER}" "${PASS}" "${TO}"
