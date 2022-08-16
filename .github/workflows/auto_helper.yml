@@ -34,5 +34,4 @@ jobs:
           USER: ${{ secrets.USER }}
           PASS: ${{ secrets.PASS }}
           TO: ${{ secrets.TO }}
-        run: npm ci && node src/juejin.js "${COOKIE}" "${USER}" "${PASS}" "${TO}"
-        run: npm ci && node src/v2free.js "${COOKIE2}" "${USER}" "${PASS}" "${TO}"
+        run: npm ci && node src/juejin.js "${COOKIE}" "${USER}" "${PASS}" "${TO}"  npm ci && node src/v2free.js "${COOKIE2}" "${USER}" "${PASS}" "${TO}"
