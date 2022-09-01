@@ -131,7 +131,7 @@ const lucky = async () => {
       headers,
       method: 'POST',
       credentials: 'include',
-      body: JSON.stringify({ lottery_history_id: '7052109119238438925' }),
+      body: JSON.stringify({ lottery_history_id: '7137922213407096840' }),
     }
   ).then((res) => res.json());
   console.log(res, 'llll');
