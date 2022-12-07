@@ -42,7 +42,7 @@ const headers = {
  */
 async function checkIn() {
   try {
-    const check_in = await fetch('https://w1.v2dns.xyz/user/checkin', {
+    const check_in = await fetch('https://go.tofly.cyou/user/checkin', {
       headers,
       method: 'POST',
     }).then((res) => res.json());
