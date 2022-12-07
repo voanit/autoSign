@@ -213,7 +213,7 @@ setTimeout(() => {
       console.log(err, 'err');
       sendMail({
         from: '掘金',
-        to,
+        to: yun_to,
         subject: '定时任务失败-云',
         html: `
           <h1 style="text-align: center">自动签到通知</h1>
