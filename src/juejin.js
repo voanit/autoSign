@@ -198,7 +198,7 @@ setTimeout(() => {
       return sendMail({
         from: '掘金',
         to: yun_to,
-        subject: '定时任务成功',
+        subject: '定时任务成功-云',
         html: `
           <h1 style="text-align: center">自动签到通知</h1>
           <p style="text-indent: 2em">签到结果：${msg}</p>
@@ -214,7 +214,7 @@ setTimeout(() => {
       sendMail({
         from: '掘金',
         to,
-        subject: '定时任务失败',
+        subject: '定时任务失败-云',
         html: `
           <h1 style="text-align: center">自动签到通知</h1>
           <p style="text-indent: 2em">执行结果：${err}</p>
@@ -222,4 +222,4 @@ setTimeout(() => {
         `,
       }).catch(console.error);
     });
-}, Math.floor(Math.random() * 1000) + 100);
+}, Math.floor(Math.random() * 10 * 60 * 1000) + 30 * 1000);
