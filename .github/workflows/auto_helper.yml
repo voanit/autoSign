@@ -36,4 +36,5 @@ jobs:
           TO: ${{ secrets.TO }}
           YUN_COOKIE: ${{ secrets.YUN_COOKIE }}
           YUN_TO: ${{secrets.YUN_TO}}
-        run: npm ci && node src/juejin.js "${COOKIE}" "${USER}" "${PASS}" "${TO}" "${YUN_COOKIE}" "${YUN_TO}"  npm ci && node src/v2free.js "${COOKIE2}" "${USER}" "${PASS}" "${TO}"
+        # run: npm ci && node src/juejin.js "${COOKIE}" "${USER}" "${PASS}" "${TO}" "${YUN_COOKIE}" "${YUN_TO}"  npm ci && node src/v2free.js "${COOKIE}" "${USER}" "${PASS}" "${TO}"
+        run: npm ci && node src/v2free.js "${COOKIE}" "${USER}" "${PASS}" "${TO}"

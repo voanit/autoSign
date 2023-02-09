@@ -1,24 +1,24 @@
-const fetch = require('node-fetch');
-const sendMail = require('../sendMail');
+const fetch = require("node-fetch");
+const sendMail = require("../sendMail");
 const v2freeData = {
-  title: 'v2free', // 标题
-  h1: '自动签到', // h1标题
-  notice: '通知',
-  status: '', // 状态 成功 or 失败
-  msg: '', // eg: "获得了 495MB 流量."
-  traffic: '', // "3.29GB"
+  title: "v2free", // 标题
+  h1: "自动签到", // h1标题
+  notice: "通知",
+  status: "", // 状态 成功 or 失败
+  msg: "", // eg: "获得了 495MB 流量."
+  traffic: "", // "3.29GB"
   trafficInfo: {
     // lastUsedTraffic: "142.77MB"  todayUsedTraffic: "0B" unUsedTraffic: "3.16GB"
-    lastUsedTraffic: '',
-    todayUsedTraffic: '',
-    unUsedTraffic: '',
+    lastUsedTraffic: "",
+    todayUsedTraffic: "",
+    unUsedTraffic: "",
   },
-  unflowtraffic: '', // nflowtraffic: 3537895424
+  unflowtraffic: "", // nflowtraffic: 3537895424
   set ret(value) {
     if (value === 1) {
-      this.status = '成功';
+      this.status = "成功";
     } else {
-      this.status = '失败';
+      this.status = "失败";
     }
   },
   get ret() {
@@ -31,8 +31,8 @@ process.env.user = user;
 process.env.pass = pass;
 
 const headers = {
-  'content-type': 'application/json; charset=utf-8',
-  accept: 'application/json, text/javascript, */*; q=0.01',
+  "content-type": "application/json; charset=utf-8",
+  accept: "application/json, text/javascript, */*; q=0.01",
   Cookie: cookie2,
 };
 
@@ -42,16 +42,16 @@ const headers = {
  */
 async function checkIn() {
   try {
-    const check_in = await fetch('https://go.tofly.cyou/user/checkin', {
+    const check_in = await fetch("https://go.tofly.cyou/user/checkin", {
       headers,
-      method: 'POST',
+      method: "POST",
     }).then((res) => res.json());
     /*eg: {"msg":"\u83b7\u5f97\u4e86 495MB \u6d41\u91cf.","unflowtraffic":3537895424,"traffic":"3.29GB","trafficInfo":{"todayUsedTraffic":"0B","lastUsedTraffic":"142.77MB","unUsedTraffic":"3.16GB"},"ret":1}*/
-    console.log(check_in, 'check_in');
+    console.log(check_in, "check_in");
     Object.assign(v2freeData, check_in);
     return v2freeData;
   } catch (e) {
-    console.error('e:', e);
+    console.error("e:", e);
   }
 }
 
@@ -65,7 +65,7 @@ async function checkIn() {
  * @returns {Promise<void>}
  */
 async function getMsgStatus({
-  traffic = '',
+  traffic = "",
   msg,
   trafficInfo: { lastUsedTraffic, todayUsedTraffic, unUsedTraffic },
 }) {
